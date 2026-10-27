@@ -1,72 +1,44 @@
-let register = [];
+let register = [
+    { name: "Gerald", age: 20, gender: "male", score: 72 }
+];
 
-// 1. Add a student
-function addStudent(register, name, age, gender, score) {
-    register.push({
-        name: name,
-        age: age,
-        gender: gender,
-        score: score
-    });
+function addStudent(register, name, age, gender, score){
+    register.push({name: name, age: age, gender: gender, score: score})
 }
 
-// 2. Update a student's score
-function updateScore(register, name, newScore) {
-    let student = register.find((student) => student.name === name);
 
-    if (student) {
-        student.score = newScore;
+function updateScore(register, name, newScore) {
+    let check = register.filter((student) => student.name == name);
+
+    if (check.length > 0) {
+        check[0].score = newScore;
     } else {
-        console.log(`${name} was not found in the register.`);
+        console.log("Student not found");
     }
 }
 
-// 3. Get the summary
-function getSummary(register) {
-    let total = register.length;
 
-    let averageScore = total === 0
-        ? 0
-        : register.reduce((acc, student) => acc + student.score, 0) / total;
 
-    let passed = register.filter((student) => student.score >= 50).length;
+function getSummary(register){
+    // amount of student
+    let getAmount = register.map((count) => count.name)
+    let amount = getAmount.length
+    console.log('total amount of student: ', amount);
 
-    let topStudent = register.reduce((top, student) =>
-        student.score > top.score ? student : top
-    , register[0]);
+    // class average  
+    let getScore = register.map((score) => score.score);
+    let scoreAverage = getScore.reduce((acc, num) => acc + num / getScore.length)
+     console.log(scoreAverage.toFixed(2));
 
-    return {
-        total: total,
-        averageScore: Number(averageScore.toFixed(2)),
-        passed: passed,
-        topStudent: topStudent ? topStudent.name : "None"
-    };
+    // passed studenst
+    let passed = register.filter((pass) => pass.score > 49)
+    console.log('passed student: ', passed)
+
+
 }
 
-// 4. Print the register
-function printRegister(register) {
-    register.forEach((student, index) => {
-        console.log(`${index + 1} - ${student.name}: ${student.score}`);
-    });
-}
 
-// 5. Add five students
-addStudent(register, "Ada", 16, "Female", 82);
-addStudent(register, "John", 17, "Male", 40);
-addStudent(register, "Mary", 16, "Female", 90);
-addStudent(register, "David", 17, "Male", 55);
-addStudent(register, "Grace", 16, "Female", 68);
-
-// 6. Update two scores
-updateScore(register, "John", 47);
-updateScore(register, "Ada", 82);
-
-// 7. Print register and summary
-printRegister(register);
-
-let summary = getSummary(register);
-
-console.log("\nTotal:", summary.total);
-console.log("Average Score:", summary.averageScore.toFixed(2));
-console.log("Passed:", summary.passed);
-console.log("Top Student:", summary.topStudent);
+addStudent(register, 'fidelis', 11, 'male', 50);
+updateScore(register, 'fidelis', 49 )
+console.log(register);
+getSummary(register)

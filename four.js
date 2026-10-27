@@ -89,6 +89,8 @@ newObj(male, female)
 
 
 
+
+
 // let final = gender.reduce = ((acc, num) => {
 //     let males = gender.keepMale
 //     let females = gender.keepFemale
