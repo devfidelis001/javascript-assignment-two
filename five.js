@@ -34,6 +34,21 @@ function getSummary(register){
     let passed = register.filter((pass) => pass.score > 49)
     console.log('passed student: ', passed)
 
+ 
+    // best students
+    let topStudent = register.reduce((acc, num) => {
+    if (num.score > acc.score) {
+        acc = num;
+    }
+    return acc;
+    });
+
+    let call = register.filter(
+    (student) => student.score === topStudent.score
+    );
+
+    console.log("Best student:", call);
+
 
 }
 
